@@ -25,4 +25,9 @@ class Good extends ActiveRecord
 
         return $result;
     }
+
+    public function getGoodsByCategory($id)
+    {
+        return Good::find()->where(['category' => $id,])->asArray()->all();
+    }
 }

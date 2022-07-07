@@ -9,6 +9,7 @@ use yii\bootstrap4\Breadcrumbs;
 use yii\bootstrap4\Html;
 use yii\bootstrap4\Nav;
 use yii\bootstrap4\NavBar;
+use Yii;
 
 AppAsset::register($this);
 ?>
@@ -29,7 +30,7 @@ AppAsset::register($this);
     <header>
         <div class="container">
             <div class="header">
-                <a href="index.html">На главную</a>
+                <a href="<?=Yii::$app->homeUrl;?>">На главную</a>
                 <a href="#">Вход в админку</a>
                 <a href="#">Корзина</a>
                 <input type="text" style="padding: 5px" placeholder="Поиск..." name="search">

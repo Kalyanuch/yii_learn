@@ -14,4 +14,12 @@ class CategoryController extends Controller
 
         return $this->render('index', compact('goods'));
     }
+
+    public function actionView($id)
+    {
+        $model_good = new Good();
+        $goods = $model_good->getGoodsByCategory($id);
+
+        return $this->render('view', compact('goods'));
+    }
 }
