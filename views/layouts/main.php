@@ -10,6 +10,7 @@ use yii\bootstrap4\Html;
 use yii\bootstrap4\Nav;
 use yii\bootstrap4\NavBar;
 use Yii;
+use yii\helpers\Url;
 
 AppAsset::register($this);
 ?>
@@ -33,7 +34,9 @@ AppAsset::register($this);
                 <a href="<?=Yii::$app->homeUrl;?>">На главную</a>
                 <a href="#">Вход в админку</a>
                 <a href="#">Корзина</a>
-                <input type="text" style="padding: 5px" placeholder="Поиск..." name="search">
+                <form action="<?=Url::to('category/search')?>" method="get">
+                    <input type="text" style="padding: 5px" placeholder="Поиск..." name="search" value="<?=Yii::$app->request->get('search')?>">
+                </form>
             </div>
         </div>
     </header>
