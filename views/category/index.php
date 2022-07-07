@@ -1,8 +1,4 @@
-<!--<pre>-->
-<!--    --><?php
-//    print_r($goods);
-//    ?>
-<!--</pre>-->
+<?=\app\widgets\MenuWidget::widget()?>
 
 <?php if($goods) { ?>
 <div class="container">
