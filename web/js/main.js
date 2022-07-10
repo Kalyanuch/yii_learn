@@ -25,12 +25,14 @@ $('.product-button__add').on('click', function(event) {
         data: {name: name},
         dataType: 'html',
         success: function(result) {
-            // $('#cart .modal-content').html(result);
-
             $('.cart').trigger('click');
         },
         error: function(xhr, ajaxOptions, thrownError) {
             alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
         }
     });
+});
+
+$('.modal-content').on('click', '.btn-close', function() {
+    $('#cart').modal('hide');
 });
