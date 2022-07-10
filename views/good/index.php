@@ -12,7 +12,7 @@
                 <div class="product-descr">Описание: <?=$item['descr']?></div>
                 <div class="product-price">Цена: <?=$item['price']?> рублей</div>
                 <div class="product-buttons">
-                    <button type="button" class="product-button__add btn btn-success">Заказать</button>
+                    <a href="#" data-name="<?=$item['link_name']?>" class="product-button__add btn btn-success">Заказать</a>
                 </div>
             </div>
         </div>

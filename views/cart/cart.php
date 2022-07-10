@@ -9,26 +9,30 @@
         <th scope="col">Наименование</th>
         <th scope="col">Количество</th>
         <th scope="col">Цена</th>
+        <th scope="col">Всего</th>
         <th scope="col"></th>
     </tr>
     </thead>
 
     <tbody>
+    <?php foreach($items as $item) { ?>
     <tr>
-        <td style="vertical-align: middle" width="150"><img src="./img/<?=$item['img']?>" alt="<?=$item['name']?>"></td>
+        <td style="vertical-align: middle" width="150"><img src="./img/<?=$item['image']?>" alt="<?=$item['name']?>"></td>
         <td style="vertical-align: middle"><?=$item['name']?></td>
-        <td style="vertical-align: middle">1</td>
+        <td style="vertical-align: middle"><?=$item['quantity']?></td>
         <td style="vertical-align: middle"><?=$item['price']?> рублей</td>
+        <td style="vertical-align: middle"><?=$item['total']?> рублей</td>
         <td class="delete" style="text-align: center; cursor: pointer; vertical-align: middle; color: red">
             <span>✖</span></td>
     </tr>
+    <?php } ?>
     <tr style="border-top: 4px solid black">
         <td colspan="4">Всего товаров</td>
-        <td class="total-quantity">12&gt;</td>
+        <td class="total-quantity"><?=$totals['items']?></td>
     </tr>
     <tr>
         <td colspan="4">На сумму </td>
-        <td style="font-weight: 700">1200 рублей</td>
+        <td style="font-weight: 700"><?=$totals['price']?> рублей</td>
     </tr>
     </tbody>
 

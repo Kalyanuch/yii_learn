@@ -1,5 +1,17 @@
 $('.cart').on('click', function() {
-    $('#cart').modal('show');
+    $.ajax({
+        url: '/cart',
+        type: 'GET',
+        dataType: 'html',
+        success: function(result) {
+            $('#cart .modal-content').html(result);
+
+            $('#cart').modal('show');
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+        }
+    });
 });
 
 $('.product-button__add').on('click', function(event) {
@@ -13,7 +25,7 @@ $('.product-button__add').on('click', function(event) {
         data: {name: name},
         dataType: 'html',
         success: function(result) {
-            $('#cart .modal-content').html(result);
+            // $('#cart .modal-content').html(result);
 
             $('.cart').trigger('click');
         },
