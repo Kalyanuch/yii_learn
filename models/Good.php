@@ -35,4 +35,9 @@ class Good extends ActiveRecord
     {
         return Good::find()->where(['like', 'name', $text])->asArray()->all();
     }
+
+    public function getItem($name)
+    {
+        return Good::find()->where(['link_name' => $name])->one();
+    }
 }
