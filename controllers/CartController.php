@@ -63,4 +63,13 @@ class CartController extends  Controller
             $cart->addToCart($item);
         }
     }
+
+    public function actionClear()
+    {
+        $session = Yii::$app->session;
+        $session->open();
+        $session->remove('cart');
+
+        return $this->actionIndex();
+    }
 }

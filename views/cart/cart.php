@@ -41,7 +41,7 @@ if($items) {
 </table>
 
 <div class="modal-buttons" style="display: flex; padding: 15px; justify-content: space-around">
-    <button type="button" class="btn btn-danger">Очистить корзину</button>
+    <button type="button" class="btn btn-danger clear_cart">Очистить корзину</button>
     <button type="button" class="btn btn-secondary btn-close">Продолжить покупки</button>
     <button type="button" class="btn btn-success btn-next">Оформить заказ</button>
 </div><div id="js-atavi-extension-install"></div><div id="target_kultivator_ico" data-ico="chrome-extension://ailgcbdikiapkcbglcpfippolmjfljgi/images/ico.png" style="display: none;"></div>

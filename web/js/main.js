@@ -1,4 +1,6 @@
-$('.cart').on('click', function() {
+$('.cart').on('click', function(event) {
+    event.preventDefault();
+
     $.ajax({
         url: '/cart',
         type: 'GET',
@@ -33,6 +35,27 @@ $('.product-button__add').on('click', function(event) {
     });
 });
 
-$('.modal-content').on('click', '.btn-close', function() {
-    $('#cart').modal('hide');
+$('.modal-content').on('click', '.btn-close', function(event) {
+    event.preventDefault();
+
+    $(this).closest('.modal').modal('hide');
+});
+
+$('.modal-content').on('click', '.clear_cart', function(event) {
+    event.preventDefault();
+
+    if(confirm('Очистить корзину?'))
+    {
+        $.ajax({
+            url: '/cart/clear',
+            type: 'GET',
+            dataType: 'html',
+            success: function(result) {
+                $('#cart .modal-content').html(result);
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+        });
+    }
 });
