@@ -13,7 +13,7 @@ class CartController extends  Controller
     {
         $session = Yii::$app->session;
         $session->open();
-        $cart = $session->get('cart');
+        $cart = $session->get('cart') ?? [];
 
         $items = [];
         $totals = [];

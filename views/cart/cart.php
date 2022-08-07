@@ -1,6 +1,8 @@
 <!-- saved from url=(0164)https://54901.selcdn.ru/data/files/12250/176/76c513850f991e4e65ef4b49f8f3a49e.html?temp_url_sig=5e79dbeb11907f3965eb323d81642e7d0cc3b7bd&temp_url_expires=1555682517 -->
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></head><body><h2 style="padding: 10px; text-align: center">Корзина</h2>
-
+<?php
+if($items) {
+?>
 <table class="table table-striped">
 
     <thead>
@@ -42,4 +44,12 @@
     <button type="button" class="btn btn-danger">Очистить корзину</button>
     <button type="button" class="btn btn-secondary btn-close">Продолжить покупки</button>
     <button type="button" class="btn btn-success btn-next">Оформить заказ</button>
-</div><div id="js-atavi-extension-install"></div><div id="target_kultivator_ico" data-ico="chrome-extension://ailgcbdikiapkcbglcpfippolmjfljgi/images/ico.png" style="display: none;"></div></body></html>
+</div><div id="js-atavi-extension-install"></div><div id="target_kultivator_ico" data-ico="chrome-extension://ailgcbdikiapkcbglcpfippolmjfljgi/images/ico.png" style="display: none;"></div>
+<?php } else { ?>
+<h3>Корзина пуста</h3>
+<div class="modal-buttons" style="display: flex; padding: 15px; justify-content: space-around">
+    <button type="button" class="btn btn-secondary btn-close">Начать покупки</button>
+</div>
+<?php } ?>
+</body>
+</html>
