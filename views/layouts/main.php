@@ -33,7 +33,7 @@ AppAsset::register($this);
             <div class="header">
                 <a href="<?=Yii::$app->homeUrl;?>">На главную</a>
                 <a href="#">Вход в админку</a>
-                <a href="#" class="cart">Корзина</a>
+                <a href="#" class="cart">Корзина <span>(0)</span></a>
                 <form action="<?=Url::to('category/search')?>" method="get">
                     <input type="text" style="padding: 5px" placeholder="Поиск..." name="search" value="<?=Yii::$app->request->get('search')?>">
                 </form>

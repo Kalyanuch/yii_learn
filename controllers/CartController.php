@@ -78,7 +78,6 @@ class CartController extends  Controller
     {
         $session = Yii::$app->session;
         $session->open();
-        //$session->remove('cart');
         $cart = $session->get('cart');
 
         if(isset($cart[$product]))
@@ -87,5 +86,21 @@ class CartController extends  Controller
         $session->set('cart', $cart);
 
         return $this->actionIndex();
+    }
+
+    public function actionTotal()
+    {
+        $session = Yii::$app->session;
+        $session->open();
+        $cart = $session->get('cart') ?? [];
+
+        $total = 0;
+
+        foreach($cart as $item)
+        {
+            $total += $item['quantity'];
+        }
+
+        return $total;
     }
 }

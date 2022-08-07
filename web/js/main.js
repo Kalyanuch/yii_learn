@@ -9,6 +9,8 @@ $('.cart').on('click', function(event) {
             $('#cart .modal-content').html(result);
 
             $('#cart').modal('show');
+
+            refreshHeaderCart();
         },
         error: function(xhr, ajaxOptions, thrownError) {
             alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
@@ -28,6 +30,8 @@ $('.product-button__add').on('click', function(event) {
         dataType: 'html',
         success: function(result) {
             $('.cart').trigger('click');
+
+
         },
         error: function(xhr, ajaxOptions, thrownError) {
             alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
@@ -52,6 +56,8 @@ $('.modal-content').on('click', '.clear_cart', function(event) {
             dataType: 'html',
             success: function(result) {
                 $('#cart .modal-content').html(result);
+
+                refreshHeaderCart();
             },
             error: function(xhr, ajaxOptions, thrownError) {
                 alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
@@ -74,10 +80,31 @@ $('.modal-content').on('click', '.delete span', function(event) {
             dataType: 'html',
             success: function(result) {
                 $('#cart .modal-content').html(result);
+
+                refreshHeaderCart();
             },
             error: function(xhr, ajaxOptions, thrownError) {
                 alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
             }
         });
     }
+});
+
+function refreshHeaderCart()
+{
+    $.ajax({
+        url: '/cart/total',
+        type: 'GET',
+        dataType: 'html',
+        success: function(result) {
+            $('.header .cart span').html('(' + result + ')');
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+        }
+    });
+}
+
+$(document).ready(function() {
+    refreshHeaderCart();
 });
