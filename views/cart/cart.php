@@ -24,8 +24,7 @@ if($items) {
         <td style="vertical-align: middle"><?=$item['quantity']?></td>
         <td style="vertical-align: middle"><?=$item['price']?> рублей</td>
         <td style="vertical-align: middle"><?=$item['total']?> рублей</td>
-        <td class="delete" style="text-align: center; cursor: pointer; vertical-align: middle; color: red">
-            <span>✖</span></td>
+        <td class="delete" style="text-align: center; cursor: pointer; vertical-align: middle; color: red"><span data-product="<?=$item['id']?>">✖</span></td>
     </tr>
     <?php } ?>
     <tr style="border-top: 4px solid black">

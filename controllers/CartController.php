@@ -23,6 +23,7 @@ class CartController extends  Controller
             $total = $item['product']['price'] * $item['quantity'];
 
             array_push($items, [
+                'id' => $item['product']['id'],
                 'name' => $item['product']['name'],
                 'quantity' => $item['quantity'],
                 'price' => $item['product']['price'],
@@ -69,6 +70,21 @@ class CartController extends  Controller
         $session = Yii::$app->session;
         $session->open();
         $session->remove('cart');
+
+        return $this->actionIndex();
+    }
+
+    public function actionRemove($product)
+    {
+        $session = Yii::$app->session;
+        $session->open();
+        //$session->remove('cart');
+        $cart = $session->get('cart');
+
+        if(isset($cart[$product]))
+            unset($cart[$product]);
+
+        $session->set('cart', $cart);
 
         return $this->actionIndex();
     }

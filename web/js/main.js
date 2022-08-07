@@ -59,3 +59,25 @@ $('.modal-content').on('click', '.clear_cart', function(event) {
         });
     }
 });
+
+$('.modal-content').on('click', '.delete span', function(event) {
+    event.preventDefault();
+
+    const product = parseInt($(this).data('product'));
+
+    if(product)
+    {
+        $.ajax({
+            url: '/cart/remove',
+            type: 'GET',
+            data: {product: product},
+            dataType: 'html',
+            success: function(result) {
+                $('#cart .modal-content').html(result);
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+        });
+    }
+});
