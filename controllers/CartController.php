@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\Cart;
 use app\models\Good;
+use app\models\Order;
 use yii\web\Controller;
 use Yii;
 
@@ -109,6 +110,8 @@ class CartController extends  Controller
         $session = Yii::$app->session;
         $session->open();
 
-        return $this->renderPartial('order');
+        $order = new Order();
+
+        return $this->renderPartial('order', compact('order'));
     }
 }
