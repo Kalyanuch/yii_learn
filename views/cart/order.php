@@ -9,5 +9,5 @@ use yii\widgets\ActiveForm;
 <?= $form->field($order, 'email') ?>
 <?= $form->field($order, 'phone') ?>
 <?= $form->field($order, 'address') ?>
-<button class="btn btn-success">Оформить заказ</button>
+<button class="btn btn-info">Оформить заказ</button>
 <?php ActiveForm::end(); ?>

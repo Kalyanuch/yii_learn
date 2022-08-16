@@ -112,6 +112,37 @@ class CartController extends  Controller
 
         $order = new Order();
 
+        //print_r(Yii::$app->request->post());exit;
+
+        if($order->load(Yii::$app->request->post()))
+        {
+            $order->date = date('Y-m-d H:i:s');
+
+            $cart = $session->get('cart') ?? [];
+
+            $total = 0;
+
+            foreach($cart as $item)
+            {
+                $total = $item['product']['price'] * $item['quantity'];
+            }
+
+            $order->sum = $total;
+
+            if($order->save())
+            {
+                Yii::$app->mailer->compose()
+                    ->setFrom(['yii_store@gmail.com' => 'yii store'])
+                    ->setTo($order->email)
+                    ->setSubject('Заказ оформлен')
+                    ->send();
+
+                $session->remove('cart');
+
+                return $this->render('success');
+            }
+        }
+
         $this->layout = 'modal-layout';
         return $this->render('order', compact('order'));
     }
