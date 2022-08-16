@@ -90,6 +90,24 @@ $('.modal-content').on('click', '.delete span', function(event) {
     }
 });
 
+$('.modal-content').on('click', '.btn-success', function() {
+    $('#cart').modal('hide');
+
+    $.ajax({
+        url: '/cart/order',
+        type: 'GET',
+        dataType: 'html',
+        success: function(result) {
+            $('#order .modal-content').html(result);
+
+            $('#order').modal('show');
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+        }
+    });
+});
+
 function refreshHeaderCart()
 {
     $.ajax({

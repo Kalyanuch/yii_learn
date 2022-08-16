@@ -103,4 +103,12 @@ class CartController extends  Controller
 
         return $total;
     }
+
+    public function actionOrder()
+    {
+        $session = Yii::$app->session;
+        $session->open();
+
+        return $this->renderPartial('order');
+    }
 }

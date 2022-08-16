@@ -36,20 +36,4 @@ class OrderGood extends \yii\db\ActiveRecord
             [['name'], 'string', 'max' => 255],
         ];
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'ID',
-            'order_id' => 'Order ID',
-            'product_id' => 'Product ID',
-            'name' => 'Name',
-            'price' => 'Price',
-            'quantity' => 'Quantity',
-            'sum' => 'Sum',
-        ];
-    }
 }
