@@ -112,6 +112,7 @@ class CartController extends  Controller
 
         $order = new Order();
 
-        return $this->renderPartial('order', compact('order'));
+        $this->layout = 'modal-layout';
+        return $this->render('order', compact('order'));
     }
 }
