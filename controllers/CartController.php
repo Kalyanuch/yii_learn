@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\Cart;
 use app\models\Good;
 use app\models\Order;
+use yii\helpers\Url;
 use yii\web\Controller;
 use Yii;
 
@@ -109,37 +110,37 @@ class CartController extends  Controller
     {
         $session = Yii::$app->session;
         $session->open();
+        $cart = $session->get('cart') ?? [];
+
+        if(empty($cart))
+            return Yii::$app->response->redirect(Url::to('/'));
 
         $order = new Order();
 
-        //print_r(Yii::$app->request->post());exit;
-
-        if($order->load(Yii::$app->request->post()))
+        if($order->load(Yii::$app->request->post()) && $cart)
         {
             $order->date = date('Y-m-d H:i:s');
-
-            $cart = $session->get('cart') ?? [];
 
             $total = 0;
 
             foreach($cart as $item)
-            {
                 $total = $item['product']['price'] * $item['quantity'];
-            }
 
             $order->sum = $total;
 
             if($order->save())
             {
+                $order_id = $order->id;
+
                 Yii::$app->mailer->compose()
                     ->setFrom(['yii_store@gmail.com' => 'yii store'])
                     ->setTo($order->email)
-                    ->setSubject('Заказ оформлен')
+                    ->setSubject('Заказ #' . $order_id . ' оформлен')
                     ->send();
 
                 $session->remove('cart');
 
-                return $this->render('success');
+                return $this->render('success', compact('order_id'));
             }
         }
 
