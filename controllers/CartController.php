@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\Cart;
 use app\models\Good;
 use app\models\Order;
+use app\models\OrderGood;
 use yii\helpers\Url;
 use yii\web\Controller;
 use Yii;
@@ -132,6 +133,7 @@ class CartController extends  Controller
                 $total = $item['product']['price'] * $item['quantity'];
 
                 array_push($items, [
+                    'id' => $item['product']['id'],
                     'name' => $item['product']['name'],
                     'quantity' => $item['quantity'],
                     'price' => $item['product']['price'],
@@ -147,6 +149,18 @@ class CartController extends  Controller
             if($order->save())
             {
                 $order_id = $order->id;
+
+                foreach($items as $item)
+                {
+                    $order_good = new OrderGood();
+                    $order_good->order_id = $order_id;
+                    $order_good->product_id = $item['id'];
+                    $order_good->name = $item['name'];
+                    $order_good->price = $item['price'];
+                    $order_good->quantity = $item['quantity'];
+                    $order_good->sum = $item['total'];
+                    $order_good->save();
+                }
 
                 Yii::$app->mailer->compose('order-mail', ['order' => $order, 'items' => $items, 'totals' => $totals])
                     ->setFrom(['yii_store@gmail.com' => 'yii store'])

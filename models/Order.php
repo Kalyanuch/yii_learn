@@ -50,4 +50,9 @@ class Order extends \yii\db\ActiveRecord
             'address' => 'Адрес',
         ];
     }
+
+    public function getOrderGoods()
+    {
+        return $this->hasMany(OrderGood::class, ['order_id' => 'id']);
+    }
 }

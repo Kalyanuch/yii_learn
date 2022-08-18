@@ -36,4 +36,9 @@ class OrderGood extends \yii\db\ActiveRecord
             [['name'], 'string', 'max' => 255],
         ];
     }
+
+    public function getOrder()
+    {
+        return $this->hasOne(Order::class, ['id' => 'order_id']);
+    }
 }
