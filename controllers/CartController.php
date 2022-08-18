@@ -121,18 +121,34 @@ class CartController extends  Controller
         {
             $order->date = date('Y-m-d H:i:s');
 
-            $total = 0;
+            $items = [];
+            $totals = [
+                'price' => 0,
+                'items' => 0
+            ];
 
             foreach($cart as $item)
+            {
                 $total = $item['product']['price'] * $item['quantity'];
 
-            $order->sum = $total;
+                array_push($items, [
+                    'name' => $item['product']['name'],
+                    'quantity' => $item['quantity'],
+                    'price' => $item['product']['price'],
+                    'total' => $total,
+                ]);
+
+                $totals['items'] += $item['quantity'];
+                $totals['price'] += $total;
+            }
+
+            $order->sum = $totals['price'];
 
             if($order->save())
             {
                 $order_id = $order->id;
 
-                Yii::$app->mailer->compose()
+                Yii::$app->mailer->compose('order-mail', ['order' => $order, 'items' => $items, 'totals' => $totals])
                     ->setFrom(['yii_store@gmail.com' => 'yii store'])
                     ->setTo($order->email)
                     ->setSubject('Заказ #' . $order_id . ' оформлен')
